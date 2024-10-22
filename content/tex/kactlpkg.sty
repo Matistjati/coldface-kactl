@@ -27,7 +27,7 @@
 	\def\@subtitle{#1}
 }
 \newcommand{\team}[2]{
-	\def\@teamname{#1}
+	\def\@teamlogo{#1}
 	\def\@teammembers{#2}
 }
 \newcommand{\contest}[2]{
@@ -221,9 +221,9 @@
 	\begin{center}
 		\strut % Magic
 		\vspace{3cm}\\
-		\includegraphics[width=3cm]{\@unilogo}\\
+		\includegraphics[width=6cm]{\@unilogo}\\
 		{\fontsize{25}{30}\selectfont \@unilong\\}
-		{\fontsize{60}{60}\selectfont \@teamname\\}
+		\includegraphics[width=1cm]{\@teamlogo}\\
 		\vspace{0.5cm}
 		{\huge \@teammembers\\}
 		\vfill
