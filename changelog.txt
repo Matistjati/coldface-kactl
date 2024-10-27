@@ -5,8 +5,10 @@ add lower bound flow
 add centroid decomposition
 add submasks
 change vimrc and bashrc loke
-add articulation points
 remove SIMD
+add articulation points/node biconnected components
+clarified between edge/node biconnected
+add block cut tree
 
 
 
