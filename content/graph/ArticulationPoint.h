@@ -31,11 +31,11 @@ vi articulation_points(vvi& adj) {
 	ap.assign(sz(adj), 0);
 	lo.assign(sz(adj), 0);
 	depth.resize(sz(adj), -1);
-	rep(i, sz(adj)) if (depth[i] == -1) {
+	rep(i, 0, sz(adj)) if (depth[i] == -1) {
 		depth[i] = 0;
 		ap[i] = dfs(i, i, adj) > 1;
 	}
 	vi ret;
-	rep(i, sz(adj)) if (ap[i]) ret.push_back(i);
+	rep(i, 0, sz(adj)) if (ap[i]) ret.push_back(i);
 	return ret;
 }
