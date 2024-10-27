@@ -1,6 +1,12 @@
-set cin aw ai is ts=4 sw=4 tm=50 nu noeb bg=dark ru cul
-sy on   |   im jk <esc>   |   im kj <esc>   |   no ; :
+syntax on
+colorscheme elflord " or desert
+set cursorline showmatch
+set number relativenumber autoindent cindent
+set expandtab softtabstop=2 smarttab shiftwidth=2
+noremap <space> :
+inoremap {<CR> {<CR>}<Esc>ko
+inoremap (<CR> (<CR>)<Esc>ko
 " Select region and then type :Hash to hash your selection.
 " Useful for verifying that there aren't mistypes.
 ca Hash w !cpp -dD -P -fpreprocessed \| tr -d '[:space:]' \
- \| md5sum \| cut -c-6
+\| md5sum \| cut -c-6
