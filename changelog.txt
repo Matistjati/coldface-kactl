@@ -4,3 +4,11 @@ add dinic
 add lower bound flow
 add centroid decomposition
 add submasks
+change vimrc and bashrc loke
+add articulation points
+remove SIMD
+
+
+
+chopping block: binary lifting
+improve: lazy segtree
