@@ -34,8 +34,7 @@ struct Centroid {
         par[u] = p;
         if (p!=-1) children[p].push_back(u);
         for (int e : adj[u]) {
-            iter_swap(find(all(adj[e]), u), rbegin(adj[e]));
-            adj[e].pop_back();
+            adj[e].erase(find(all(adj[e]), u));
             dfs(e, u);
         }
     }
