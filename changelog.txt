@@ -9,7 +9,7 @@ remove SIMD
 add articulation points/node biconnected components
 clarified between edge/node biconnected
 add block cut tree
-
+add halfplane intersection
 
 
 chopping block: binary lifting
