@@ -157,3 +157,12 @@ Data structures
 	Monotone queues / monotone stacks / sliding queues
 	Sliding queue using 2 stacks
 	Persistent segment tree
+Drinks
+	Sixtens special: ljummet shotglas. 50% fireball, 50% fireball
+	Tequila sunrise: 1 del grenadin, 6 delar tequila,
+	12 delar apelsinjuice
+	Vodka vatskeersattning: lat en vatskeersattning brusa fardigt
+	i mindre mangd vatten. Blanda sen i vodkan
+	Martini: 5 delar martini, 1 del vermouth, 2 oliver
+	Cold face: gurgla munskolj i 10 sekunder. Ta sedan en shot
+	valkyld minttu

@@ -11,6 +11,10 @@ clarified between edge/node biconnected
 add block cut tree
 add halfplane intersection
 add matrix cheat sheet
+remove smallptr
+add closure problem
+add path cover
+add drinks
 
 chopping block: binary lifting
 improve: lazy segtree
