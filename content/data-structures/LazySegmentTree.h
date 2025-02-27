@@ -1,66 +1,49 @@
 /**
- * Author: Simon Lindholm
- * Date: 2016-10-08
+ * Author: Joshua Andersson
+ * Date: 2025-02-27
  * License: CC0
  * Source: me
- * Description: Segment tree with ability to add or set values of large intervals, and compute max of intervals.
- * Can be changed to other things.
- * Use with a bump allocator for better performance, and SmallPtr or implicit indices to save memory.
+ * Description: Segment tree that can add to intervals and query their sum. 
+ * Can handle N=Q=$10^6$ or N=$2 \cdot 10^5$, Q=$2 \cdot 10^6$ in one second on Kattis.
+ * To modify, change put\_node and the end of query and add. For most general, one put\_node
+ * per update kind, put\_node calls each one in correct order.
  * Time: O(\log N).
- * Usage: Node* tr = new Node(v, 0, sz(v));
+ * Usage: Tree tree(N);
+ * tree.add(1,0,N-1,l,r,v);
  * Status: stress-tested a bit
  */
 #pragma once
 
-#include "../various/BumpAllocator.h"
-
-const int inf = 1e9;
-struct Node {
-	Node *l = 0, *r = 0;
-	int lo, hi, mset = inf, madd = 0, val = -inf;
-	Node(int lo,int hi):lo(lo),hi(hi){} // Large interval of -inf
-	Node(vi& v, int lo, int hi) : lo(lo), hi(hi) {
-		if (lo + 1 < hi) {
-			int mid = lo + (hi - lo)/2;
-			l = new Node(v, lo, mid); r = new Node(v, mid, hi);
-			val = max(l->val, r->val);
-		}
-		else val = v[lo];
-	}
-	int query(int L, int R) {
-		if (R <= lo || hi <= L) return -inf;
-		if (L <= lo && hi <= R) return val;
-		push();
-		return max(l->query(L, R), r->query(L, R));
-	}
-	void set(int L, int R, int x) {
-		if (R <= lo || hi <= L) return;
-		if (L <= lo && hi <= R) mset = val = x, madd = 0;
-		else {
-			push(), l->set(L, R, x), r->set(L, R, x);
-			val = max(l->val, r->val);
-		}
-	}
-	void add(int L, int R, int x) {
-		if (R <= lo || hi <= L) return;
-		if (L <= lo && hi <= R) {
-			if (mset != inf) mset += x;
-			else madd += x;
-			val += x;
-		}
-		else {
-			push(), l->add(L, R, x), r->add(L, R, x);
-			val = max(l->val, r->val);
-		}
-	}
-	void push() {
-		if (!l) {
-			int mid = lo + (hi - lo)/2;
-			l = new Node(lo, mid); r = new Node(mid, hi);
-		}
-		if (mset != inf)
-			l->set(lo,hi,mset), r->set(lo,hi,mset), mset = inf;
-		else if (madd)
-			l->add(lo,hi,madd), r->add(lo,hi,madd), madd = 0;
-	}
+struct Tree { // range add, range sum
+    vi tree, lazy;
+    Tree(int n) : tree(n * 4), lazy(n * 4) {}
+    void put_node(int x, int l, int r, int v) {
+        tree[x] += v * (r - l + 1);
+        lazy[x] += v;
+    }
+    void push(int x, int l, int r) {
+        int mid = (l + r) / 2;
+        put_node(x * 2, l, mid, lazy[x]);
+        put_node(x * 2 + 1, mid + 1, r, lazy[x]);
+        lazy[x] = 0;
+    }
+    // add v to [l,r]. call add(1,0,n-1,...)
+    void add(int x, int l, int r, int ql, int qr, int v) {
+        if (l > qr || r < ql) return;
+        if (l >= ql && r <= qr) return put_node(x, l, r, v);
+        push(x, l, r);
+        int mid = (l + r) / 2;
+        add(x * 2, l, mid, ql, qr, v);
+        add(x * 2 + 1, mid + 1, r, ql, qr, v);
+        tree[x] = tree[x * 2] + tree[x * 2 + 1];
+    }
+    // sum [l,r]. call query(1,0,n-1,...)
+    int query(int x, int l, int r, int ql, int qr) {
+        if (l > qr || r < ql) return 0;
+        if (l >= ql && r <= qr) return tree[x];
+        push(x, l, r);
+        int mid = (l + r) / 2;
+        return query(x * 2, l, mid, ql, qr) +
+            query(x * 2 + 1, mid + 1, r, ql, qr);
+    }
 };

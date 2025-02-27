@@ -15,6 +15,13 @@ remove smallptr
 add closure problem
 add path cover
 add drinks
+remove longest increasing subsequence
+make lazy segment tree non-sparse
+add fast hashmap
+add brute.sh
+add hockey-stick identity
+remove both bump allocators
+remove binarylifting
 
 chopping block: binary lifting
 improve: lazy segtree
