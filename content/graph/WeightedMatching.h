@@ -2,6 +2,7 @@
  * Author: Jeremy Lim, Joshua Andersson
  * Date: 2026-07-09
  * License: CC0
+ * Source: https://github.com/scipy/scipy/blob/main/scipy/optimize/rectangular_lsap/rectangular_lsap.cpp
  * Description: Given a weighted bipartite graph, matches every node on
  * the left with a node on the right such that no
  * nodes are in two matchings and the sum of the edge weights is minimal. Takes
