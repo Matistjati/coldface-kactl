@@ -8,7 +8,7 @@
 
 void test(int N, int mxCost, int iters) {
 	for (int it = 0; it < iters; it++) {
-		int n = randIncl(1, N), m = randIncl(1, N);
+		int n = randIncl(0, N), m = randIncl(0, N);
 		if (n > m)
 			swap(n, m);
 
