@@ -32,7 +32,7 @@ weighted_matching(vector<vector<T>> &C) {
 				dist[j] = nd, prev[j] = r;
 		}
 		for (cost += dist[c]; s--;)
-			j = cols[s], potential[j] = dist[j] - d;
+			potential[cols[s]] = dist[cols[s]] - d;
 		for (; r != i; swap(c, row_match[r]))
 			r = col_match[c] = prev[c];
 	}
