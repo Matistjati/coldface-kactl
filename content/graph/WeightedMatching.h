@@ -23,7 +23,7 @@ weighted_matching(vector<vector<T>> &C) {
 	while (i--) {
 		rep(c,0,m) dist[c] = C[i][c], cols[c] = c, prev[c] = i;
 		for (s = 0;;) {
-			for (j = s; j < m; j++) {
+			rep(j,s,m) {
 				c = cols[j], nd = dist[c] - potential[c];
 				if (j == s || d > nd) d = nd, swap(cols[s], cols[j]);
 			}
