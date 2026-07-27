@@ -29,7 +29,7 @@ void test(int N, int mxCost, int iters) {
 		}
 		mcmf.setpi(s);
 		auto maxflow = mcmf.maxflow(s, t);
-		auto matching = weighted_matching(cost);
+		auto matching = weightedMatching(cost);
 		assert(maxflow.first == n);
 		assert(maxflow.second == matching.first);
 		int matchSum = 0;

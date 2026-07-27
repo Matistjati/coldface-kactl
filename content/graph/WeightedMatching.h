@@ -14,11 +14,11 @@
  */
 #pragma once
 
-template <typename T> pair<T, vector<int>>
-weighted_matching(vector<vector<T>> &C) {
+template<class T>
+pair<T, vi> weightedMatching(vector<vector<T>> &C) {
 	int i = sz(C), m = i ? sz(C[0]) : 0, c, s, r;
 	vector<T> dist(m), potential(m);
-	vi row_match(i), col_match(m, -1), cols(m), prev(m);
+	vi rowMatch(i), colMatch(m, -1), cols(m), prev(m);
 	T d, nd, cost = 0;
 	while (i--) {
 		rep(c,0,m) dist[c] = C[i][c], cols[c] = c, prev[c] = i;
@@ -27,14 +27,14 @@ weighted_matching(vector<vector<T>> &C) {
 				c = cols[j], nd = dist[c] - potential[c];
 				if (j == s || d > nd) d = nd, swap(cols[s], cols[j]);
 			}
-			if (!~(r = col_match[c = cols[s++]])) break;
+			if ((r = colMatch[c = cols[s++]]) == -1) break;
 			rep(j,0,m) if (dist[j] > (nd = C[r][j]-C[r][c]+dist[c]))
 				dist[j] = nd, prev[j] = r;
 		}
-		for (cost += dist[c]; s--;)
-			potential[cols[s]] = dist[cols[s]] - d;
-		for (; r != i; swap(c, row_match[r]))
-			r = col_match[c] = prev[c];
+		cost += dist[c];
+		while (s--) potential[cols[s]] = dist[cols[s]] - d;
+		for (; r != i; swap(c, rowMatch[r]))
+			r = colMatch[c] = prev[c];
 	}
-	return {cost, row_match};
+	return {cost, rowMatch};
 }
