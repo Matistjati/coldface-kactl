@@ -19,7 +19,7 @@ pair<T, vi> weightedMatching(vector<vector<T>> &C) {
 	int i = sz(C), m = i ? sz(C[0]) : 0, c, s, r;
 	vector<T> dist(m), potential(m);
 	vi rowMatch(i), colMatch(m, -1), cols(m), prev(m);
-	T d, nd, cost = 0;
+	T d = 0, nd, cost = 0;
 	while (i--) {
 		rep(c,0,m) dist[c] = C[i][c], cols[c] = c, prev[c] = i;
 		for (s = 0;;) {
